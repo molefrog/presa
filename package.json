@@ -6,8 +6,19 @@
   "repository": "https://github.com/molefrog/presa.git",
   "author": "Alexey Taktarov <molefrog@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "styled-components": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
   }
 }
