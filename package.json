@@ -5,5 +5,9 @@
   "main": "src/index.js",
   "repository": "https://github.com/molefrog/presa.git",
   "author": "Alexey Taktarov <molefrog@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "styled-components": "^2.0.0"
+  }
 }
