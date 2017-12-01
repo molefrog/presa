@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
+import SlideTheme from './slide-theme'
 
 /*
  * The `Slide` component represents a real slide
@@ -17,15 +18,11 @@ class Slide extends React.Component {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 
-    defaultBackground: PropTypes.string,
+    background: PropTypes.string,
     fitInto: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number
     })
-  }
-
-  static defaultProps = {
-    defaultBackground: 'white'
   }
 
   constructor(props) {
@@ -65,6 +62,8 @@ class Slide extends React.Component {
     const { slideBackground } = this.state
 
     const zoom = this.calculateZoom()
+    const background =
+      this.props.background || this.props.theme.slide.background
 
     const layerProps = {
       style: {
@@ -81,7 +80,7 @@ class Slide extends React.Component {
         style={{
           width: width * zoom,
           height: height * zoom,
-          background: this.props.defaultBackground
+          background: background
         }}
       >
         {slideBackground && <Layer {...layerProps}>{slideBackground}</Layer>}
@@ -107,4 +106,12 @@ const Layer = styled.div`
   left: 0;
 `
 
-export default Slide
+const ConnectedSlide = withTheme(Slide)
+
+const SlideOuter = props => (
+  <SlideTheme>
+    <ConnectedSlide {...props} />
+  </SlideTheme>
+)
+
+export default SlideOuter

@@ -1,8 +1,12 @@
+export const defaultSlideTheme = {
+  baseFontSize: 22,
+  background: '#ffffff'
+}
+
 export default {
   // Settings related to slide content appearance
-  slide: {
-    baseFontSize: 22
-  },
+  // Can be overwritten
+  slide: {},
 
   // Using web-safe font defaults: base serif font and monospace
   baseFont:
