@@ -24,13 +24,15 @@ const extractIndexFromLocation = () => {
 class Presentation extends Component {
   static propTypes = {
     name: PropTypes.string,
-    aspectRatio: PropTypes.number
+    aspectRatio: PropTypes.number,
+    theme: PropTypes.object
   }
 
   static defaultProps = {
     name: 'An awesome presentation',
     aspectRatio: 16.0 / 9.0,
-    baseWidth: 1066.0
+    baseWidth: 1066.0,
+    theme: {}
   }
 
   constructor(props) {
@@ -102,8 +104,13 @@ class Presentation extends Component {
   render() {
     const state = this.getConnectedState()
 
+    const theme = {
+      ...defaultTheme,
+      ...this.props.theme
+    }
+
     return (
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={theme}>
         <GlobalContainer>
           <RemoteControl
             onNext={state.showNextSlide}
