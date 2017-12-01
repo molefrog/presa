@@ -1,4 +1,5 @@
-const Presentation = () => {}
-const Slide = () => {}
+import Presentation from './components/presentation'
+import { SlideDecl as Slide } from './components/slide'
 
-export { Presentation, Slide }
+// Export base presentation components
+export { Slide, Presentation }
