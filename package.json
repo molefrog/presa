@@ -2,7 +2,7 @@
   "name": "presa",
   "version": "1.0.0",
   "description": "Stylish React presentation framework.",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/molefrog/presa.git",
   "author": "Alexey Taktarov <molefrog@gmail.com>",
   "license": "MIT",
