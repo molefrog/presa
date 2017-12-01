@@ -1,5 +1,6 @@
 export const defaultSlideTheme = {
   baseFontSize: 22,
+  fontScale: 1.333,
   background: '#ffffff'
 }
 

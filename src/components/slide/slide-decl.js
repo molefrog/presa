@@ -37,7 +37,8 @@ const SlideContent = styled.div`
   width: 100%;
   height: 100%;
 
-  font-size: ${props => props.theme.slide.baseFontSize};
+  font-family: ${props => props.theme.slide.baseFont};
+  font-size: ${props => props.theme.slide.baseFontSize}px;
   color: ${props => props.theme.slide.textColor};
 
   ${props =>
