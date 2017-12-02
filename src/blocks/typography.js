@@ -26,7 +26,7 @@ export const makeHeader = (tag, level, weight) =>
   Header.withComponent(tag).extend.attrs({ level, weight })``
 
 // Header components
-export const H1 = makeHeader('h1', 1, '500')
+export const H1 = makeHeader('h1', 1, 'bold')
 export const H2 = makeHeader('h2', 2, 'normal')
 export const H3 = makeHeader('h3', 3, 'normal')
 export const H4 = makeHeader('h4', 4, 'normal')
