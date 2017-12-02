@@ -22,6 +22,8 @@ export default {
   // Slideshow background
   backgroundColor: '#fafafa',
 
+  fullscreenBackgroundColor: '#000000',
+
   // Used as an accent color in
   // active elements
   primaryColor: '#3c59ff',

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { ThemeProvider } from 'styled-components'
 
+import GlobalBackground from './global-background'
 import RemoteControl from './remote-control'
 import FullscreenMode from './fullscreen-mode'
 import SlideshowMode from './slideshow-mode'
@@ -112,6 +113,8 @@ class Presentation extends Component {
     return (
       <ThemeProvider theme={theme}>
         <GlobalContainer>
+          <GlobalBackground {...state} />
+
           <RemoteControl
             onNext={state.showNextSlide}
             onPrev={state.showPrevSlide}
@@ -136,7 +139,6 @@ const GlobalContainer = styled.div`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: ${props => props.theme.backgroundColor};
   color: ${props => props.theme.textColor};
 `
 

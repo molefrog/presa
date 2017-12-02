@@ -73,7 +73,6 @@ const Fullscreen = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: black;
 `
 
 export default FullscreenMode
