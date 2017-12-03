@@ -26,13 +26,15 @@ class Presentation extends Component {
   static propTypes = {
     name: PropTypes.string,
     aspectRatio: PropTypes.number,
-    theme: PropTypes.object
+    theme: PropTypes.object,
+    tableOfContents: PropTypes.bool
   }
 
   static defaultProps = {
     name: 'An awesome presentation',
     aspectRatio: 16.0 / 9.0,
     baseWidth: 1066.0,
+    tableOfContents: false,
     theme: {}
   }
 
@@ -49,6 +51,7 @@ class Presentation extends Component {
       presentationName: props.name,
       presentMode: modes.SLIDESHOW,
       currentSlide: currentIndex,
+      showToc: props.tableOfContents,
 
       slideWidth: props.baseWidth,
       slideHeight: props.baseWidth / props.aspectRatio
@@ -78,6 +81,12 @@ class Presentation extends Component {
     }))
   }
 
+  toggleToc = shown => {
+    this.setState({
+      showToc: shown
+    })
+  }
+
   getConnectedState() {
     const { slides, currentSlide, presentMode } = this.state
 
@@ -97,6 +106,7 @@ class Presentation extends Component {
       toggleFullscreen: this.toggleFullscreen,
 
       switchSlide: this.switchSlide,
+      toggleToc: this.toggleToc,
       showNextSlide: () => this.shiftSlide(+1),
       showPrevSlide: () => this.shiftSlide(-1)
     }
