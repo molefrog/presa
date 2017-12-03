@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import { Slide } from '../slide'
 
+const KEY_ESC = 27
+
 class FullscreenMode extends React.Component {
   constructor(props) {
     super(props)
@@ -24,12 +26,20 @@ class FullscreenMode extends React.Component {
     })
   }
 
+  onKeyDown = event => {
+    if (event.keyCode === KEY_ESC) {
+      this.props.toggleFullscreen()
+    }
+  }
+
   componentDidMount() {
     window.addEventListener('resize', this.onResize)
+    document.body.addEventListener('keydown', this.onKeyDown)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize)
+    document.body.removeEventListener('keydown', this.onKeyDown)
   }
 
   render() {
