@@ -1,6 +1,16 @@
 /* eslint-disable max-len */
 import React from 'react'
 
+export const Navigation = props => (
+  <svg {...props} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M2.5 16.25a1.25 1.25 0 0 1 0-2.5h15a1.25 1.25 0 0 1 0 2.5h-15zm0-5a1.25 1.25 0 0 1 0-2.5h15a1.25 1.25 0 0 1 0 2.5h-15zm0-5a1.25 1.25 0 0 1 0-2.5H12a1.25 1.25 0 0 1 0 2.5H2.5z"
+      fillRule="nonzero"
+      fill="#000"
+    />
+  </svg>
+)
+
 export const LeftArrow = props => (
   <svg {...props} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
     <path
