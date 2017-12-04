@@ -50,7 +50,7 @@ class Toc extends React.Component {
               onClick={() => switchSlide(index)}
               data-index={index}
             >
-              <SlideArrow visible={index === currentSlide} />{' '}
+              <SlideArrow isVisible={index === currentSlide} />{' '}
               {slide.name || `Slide #${index + 1}`}
             </SlideItem>
           ))}
@@ -66,13 +66,14 @@ const Header = styled.div`
   margin-bottom: 16px;
 `
 
-const SlideArrow = styled(RightArrow)`
+// filter out `isVisible` prop
+const SlideArrow = styled(({ isVisible, ...rest }) => <RightArrow {...rest} />)`
   position: absolute;
   opacity: 0;
   left: -6px;
 
   ${props =>
-    props.visible &&
+    props.isVisible &&
     `
     opacity: 1;
   `};
