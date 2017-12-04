@@ -83,10 +83,15 @@ const NavigationBody = styled.div`
   overflow: hidden;
   box-sizing: border-box;
 
-  width: 300px;
+  width: 280px;
   display: flex;
   flex-flow: column nowrap;
   padding: 0 22px;
+
+  @media (max-width: 960px) {
+    width: 250px;
+    font-size: 15px;
+  }
 `
 
 const PresentationName = styled.div`

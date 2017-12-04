@@ -5,7 +5,43 @@ import Toc from './toc'
 import Controls from '../controls'
 import { Slide } from '../slide'
 
+const limitBy = (val, min, max) => Math.max(min, Math.min(val, max))
+
 class SlideshowMode extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      viewportWidth: props.slideWidth
+    }
+  }
+
+  recalcViewport = () => {
+    if (this._slideCont) {
+      const original = this.props.slideWidth
+      const width = this._slideCont.clientWidth
+      const value = limitBy(width, original * 0.5, original)
+
+      this.setState({
+        viewportWidth: value
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.showToc !== this.props.showToc) {
+      this.recalcViewport()
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.recalcViewport)
+    this.recalcViewport()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.recalcViewport)
+  }
+
   render() {
     const { slide, showToc } = this.props
 
@@ -14,12 +50,13 @@ class SlideshowMode extends React.Component {
         {showToc && <TocColumn {...this.props} />}
 
         <Main>
-          <CurrentSlide>
+          <CurrentSlide innerRef={el => (this._slideCont = el)}>
             <SlideCard
               key={slide.index}
               slide={slide}
               width={this.props.slideWidth}
               height={this.props.slideHeight}
+              fitInto={{ width: this.state.viewportWidth }}
             />
           </CurrentSlide>
 
@@ -47,7 +84,7 @@ const Main = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 20px 24px;
   overflow: auto;
 `
 
@@ -55,10 +92,10 @@ const SlideCard = styled(Slide)`
   overflow: hidden;
   box-shadow: 0px 5px 16px -2px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  flex-shrink: 0;
 `
 
 const CurrentSlide = styled.div`
-  margin: 0 auto;
   display: flex;
   justify-content: center;
 `
