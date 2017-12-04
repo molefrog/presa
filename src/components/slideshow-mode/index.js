@@ -47,7 +47,7 @@ const Main = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   box-sizing: border-box;
-  padding: 28px 20px;
+  padding: 20px;
   overflow: auto;
 `
 

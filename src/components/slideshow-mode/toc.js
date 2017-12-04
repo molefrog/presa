@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { RightArrow } from '../../assets/icons'
+import Copyright from './built-with'
 
 const autoScroll = true
 
@@ -35,7 +36,10 @@ class Toc extends React.Component {
 
     return (
       <NavigationBody className={className}>
-        <PresentationName>{this.props.presentationName}</PresentationName>
+        <Header>
+          <PresentationName>{this.props.presentationName}</PresentationName>
+          <Copyright />
+        </Header>
 
         <TableOfContents innerRef={el => (this._tocEl = el)}>
           {slides.map((slide, index) => (
@@ -55,6 +59,12 @@ class Toc extends React.Component {
     )
   }
 }
+
+const Header = styled.div`
+  flex-shrink: 0;
+  padding-top: 15px;
+  margin-bottom: 16px;
+`
 
 const SlideArrow = styled(RightArrow)`
   position: absolute;
@@ -82,16 +92,15 @@ const NavigationBody = styled.div`
 const PresentationName = styled.div`
   font-size: 26px;
   font-weight: bold;
-  border-bottom: 1px solid #eee;
-  flex-shrink: 0;
-  padding: 15px 0px;
+  line-height: 1;
+  margin-bottom: 5px;
 `
 
 const TableOfContents = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   overflow-y: auto;
-  padding: 15px 0px;
+  padding-bottom: 20px;
 
   &::-webkit-scrollbar {
     display: none;
