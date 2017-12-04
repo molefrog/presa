@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const ControlButton = styled.button`
   /* Base geometry */
@@ -42,6 +42,17 @@ const ControlButton = styled.button`
       transform: ${props => props.activeIconTransform || 'none'};
     }
   }
+
+  ${props =>
+    props.toggled &&
+    css`
+      &,
+      &:hover {
+        path {
+          fill: ${props => props.theme.primaryColor};
+        }
+      }
+    `};
 
   ${props =>
     props.disabled &&

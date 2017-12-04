@@ -82,8 +82,10 @@ class Presentation extends Component {
   }
 
   toggleToc = shown => {
+    const visible = typeof shown === 'undefined' ? !this.state.showToc : shown
+
     this.setState({
-      showToc: shown
+      showToc: visible
     })
   }
 
