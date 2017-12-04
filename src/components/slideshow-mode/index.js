@@ -33,7 +33,6 @@ class SlideshowMode extends React.Component {
 }
 
 const TocColumn = styled(Toc)`
-  margin-right: 10px;
   flex-shrink: 0;
 `
 
@@ -48,7 +47,7 @@ const Main = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   box-sizing: border-box;
-  padding: 28px;
+  padding: 28px 20px;
   overflow: auto;
 `
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { RightArrow } from '../../assets/icons'
+
 const autoScroll = true
 
 class Toc extends React.Component {
@@ -44,6 +46,7 @@ class Toc extends React.Component {
               onClick={() => switchSlide(index)}
               data-index={index}
             >
+              <SlideArrow visible={index === currentSlide} />{' '}
               {slide.name || `Slide #${index + 1}`}
             </SlideItem>
           ))}
@@ -53,14 +56,27 @@ class Toc extends React.Component {
   }
 }
 
+const SlideArrow = styled(RightArrow)`
+  position: absolute;
+  opacity: 0;
+  left: -6px;
+
+  ${props =>
+    props.visible &&
+    `
+    opacity: 1;
+  `};
+`
+
 const NavigationBody = styled.div`
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
 
-  width: 280px;
+  width: 300px;
   display: flex;
   flex-flow: column nowrap;
+  padding: 0 22px;
 `
 
 const PresentationName = styled.div`
@@ -68,14 +84,18 @@ const PresentationName = styled.div`
   font-weight: bold;
   border-bottom: 1px solid #eee;
   flex-shrink: 0;
-  padding: 15px 20px;
+  padding: 15px 0px;
 `
 
 const TableOfContents = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   overflow-y: auto;
-  padding: 15px 20px;
+  padding: 15px 0px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const SlideItem = styled.div`
@@ -83,7 +103,7 @@ const SlideItem = styled.div`
   cursor: pointer;
   color: #666;
   padding: 5px 0;
-  transition: padding 0.2s ease;
+  position: relative;
 
   &:hover {
     color: #222;
@@ -93,11 +113,11 @@ const SlideItem = styled.div`
     props.current &&
     `
     color: black;
-    padding-left: 8px;
+    padding-left: 18px;
   `} ${props =>
       props.future &&
       `
-    color: #e0e0e0;
+    opacity: 0.4;
   `};
 `
 
