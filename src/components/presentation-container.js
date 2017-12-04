@@ -6,13 +6,15 @@ import GlobalBackground from './global-background'
 import RemoteControl from './remote-control'
 import FullscreenMode from './fullscreen-mode'
 import SlideshowMode from './slideshow-mode'
+import BirdsEyeMode from './birds-eye-mode'
 
 // default theme for styled components
 import defaultTheme from '../theme'
 
 const modes = {
   FULLSCREEN: 'FULLSCREEN',
-  SLIDESHOW: 'SLIDESHOW'
+  SLIDESHOW: 'SLIDESHOW',
+  BIRDSEYE: 'BIRDSEYE'
 }
 
 // Gets the current slide index from
@@ -49,7 +51,7 @@ class Presentation extends Component {
     this.state = {
       slides: props.slides,
       presentationName: props.name,
-      presentMode: modes.SLIDESHOW,
+      presentMode: modes.BIRDSEYE,
       currentSlide: currentIndex,
       showToc: props.tableOfContents,
 
@@ -81,6 +83,13 @@ class Presentation extends Component {
     }))
   }
 
+  toggleBirdsEye = () => {
+    this.setState(state => ({
+      presentMode:
+        state.presentMode === modes.BIRDSEYE ? modes.SLIDESHOW : modes.BIRDSEYE
+    }))
+  }
+
   toggleToc = shown => {
     const visible = typeof shown === 'undefined' ? !this.state.showToc : shown
 
@@ -105,10 +114,12 @@ class Presentation extends Component {
 
       isSlideshow: presentMode === modes.SLIDESHOW,
       isFullscreen: presentMode === modes.FULLSCREEN,
+      isBirdsEye: presentMode === modes.BIRDSEYE,
       toggleFullscreen: this.toggleFullscreen,
 
       switchSlide: this.switchSlide,
       toggleToc: this.toggleToc,
+      toggleBirdsEye: this.toggleBirdsEye,
       showNextSlide: () => this.shiftSlide(+1),
       showPrevSlide: () => this.shiftSlide(-1)
     }
@@ -135,6 +146,7 @@ class Presentation extends Component {
 
           {state.isFullscreen && <FullscreenMode {...state} />}
           {state.isSlideshow && <SlideshowMode {...state} />}
+          {state.isBirdsEye && <BirdsEyeMode {...state} />}
         </GlobalContainer>
       </ThemeProvider>
     )

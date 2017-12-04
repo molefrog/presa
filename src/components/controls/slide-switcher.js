@@ -14,7 +14,8 @@ class SlideSwitcher extends React.Component {
       slide,
       slides,
       showNextSlide,
-      showPrevSlide
+      showPrevSlide,
+      toggleBirdsEye
     } = this.props
 
     return (
@@ -27,7 +28,11 @@ class SlideSwitcher extends React.Component {
           <LeftArrow />
         </ControlButton>
 
-        <CurrentSlide current={slide.index} total={slides.length} />
+        <CurrentSlide
+          onClick={() => toggleBirdsEye()}
+          current={slide.index}
+          total={slides.length}
+        />
 
         <ControlButton
           onClick={() => showNextSlide()}
@@ -41,8 +46,8 @@ class SlideSwitcher extends React.Component {
   }
 }
 
-const CurrentSlide = ({ current, total }) => (
-  <NavigationOuter>
+const CurrentSlide = ({ current, total, onClick }) => (
+  <NavigationOuter onClick={onClick}>
     <Navigation>
       {current + 1}
       <TotalLabel>/{total}</TotalLabel>
