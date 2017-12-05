@@ -37,5 +37,5 @@ export default {
   // Stardust gray
   mutedTextColor: '#9E9E9E',
 
-  placeholderColor: '#dedede'
+  placeholderColor: '#f1f1f1'
 }
