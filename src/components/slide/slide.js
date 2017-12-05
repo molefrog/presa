@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import styled, { withTheme } from 'styled-components'
 import SlideTheme from './slide-theme'
+import Placeholder from './placeholder'
 
 /*
  * The `Slide` component represents a real slide
@@ -19,10 +20,15 @@ class Slide extends React.Component {
     height: PropTypes.number.isRequired,
 
     background: PropTypes.string,
+    loaded: PropTypes.bool,
     fitInto: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number
     })
+  }
+
+  static defaultProps = {
+    loaded: true
   }
 
   constructor(props) {
@@ -58,7 +64,7 @@ class Slide extends React.Component {
   }
 
   render() {
-    const { width, height, slide } = this.props
+    const { width, height, slide, loaded } = this.props
     const { slideBackground } = this.state
 
     const zoom = this.calculateZoom()
@@ -83,13 +89,22 @@ class Slide extends React.Component {
           background: background
         }}
       >
-        {slideBackground && <Layer {...layerProps}>{slideBackground}</Layer>}
+        {!loaded && (
+          <Layer>
+            <Placeholder />
+          </Layer>
+        )}
 
-        <Layer {...layerProps}>
-          {React.cloneElement(slide.element, {
-            onBackgroundChange: this.handleBackgroundChange
-          })}
-        </Layer>
+        {loaded &&
+          slideBackground && <Layer {...layerProps}>{slideBackground}</Layer>}
+
+        {loaded && (
+          <Layer {...layerProps}>
+            {React.cloneElement(slide.element, {
+              onBackgroundChange: this.handleBackgroundChange
+            })}
+          </Layer>
+        )}
       </Frame>
     )
   }
@@ -104,6 +119,9 @@ const Layer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+
+  width: 100%;
+  height: 100%;
 `
 
 const ConnectedSlide = withTheme(Slide)

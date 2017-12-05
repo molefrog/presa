@@ -51,7 +51,7 @@ class Presentation extends Component {
     this.state = {
       slides: props.slides,
       presentationName: props.name,
-      presentMode: modes.BIRDSEYE,
+      presentMode: modes.SLIDESHOW,
       currentSlide: currentIndex,
       showToc: props.tableOfContents,
 
