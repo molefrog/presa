@@ -163,6 +163,10 @@ const GlobalContainer = styled.div`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  * {
+    box-sizing: border-box;
+  }
+
   color: ${props => props.theme.textColor};
 `
 

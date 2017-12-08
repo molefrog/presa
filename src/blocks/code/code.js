@@ -12,6 +12,7 @@ const codeFactory = Highlight => {
   const StyledHighlight = styled(Highlight)`
     font-size: ${props => props.fontSize}px;
     line-height: ${defaultLineHeight};
+    text-align: left;
 
     &,
     code,
