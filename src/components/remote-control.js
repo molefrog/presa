@@ -19,6 +19,11 @@ const k = {
   KEY_UP: 38,
   KEY_SPACE: 32,
 
+  // some clickers supports it
+  // for example, Logitech
+  KEY_PAGE_UP: 33,
+  KEY_PAGE_DOWN: 34,
+
   // Blank screen
   KEY_B: 66
 }
@@ -36,13 +41,18 @@ class RemoteControl extends React.Component {
     if (
       e.keyCode === k.KEY_RIGHT ||
       e.keyCode === k.KEY_DOWN ||
-      e.keyCode === k.KEY_SPACE
+      e.keyCode === k.KEY_SPACE ||
+      e.keyCode === k.KEY_PAGE_DOWN
     ) {
       return this.props.onNext()
     }
 
     // Go to previous slide
-    if (e.keyCode === k.KEY_LEFT || e.keyCode === k.KEY_UP) {
+    if (
+      e.keyCode === k.KEY_LEFT ||
+      e.keyCode === k.KEY_UP ||
+      e.keyCode === k.KEY_PAGE_UP
+    ) {
       return this.props.onPrev()
     }
 
