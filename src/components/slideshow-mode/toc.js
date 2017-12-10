@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { RightArrow } from '../../assets/icons'
-import Copyright from './built-with'
+import Copyright from '../built-with'
 
 const autoScroll = true
 

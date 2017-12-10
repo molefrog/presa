@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Presa } from '../../assets/icons'
+import { Presa } from '../assets/icons'
 
-const Copyright = () => (
-  <BuiltWith href="https://github.com/molefrog/presa" target="_blank">
-    <PresaIcon width={18} />
+const Copyright = ({ size = 14 }) => (
+  <BuiltWith
+    size={size}
+    href="https://github.com/molefrog/presa"
+    target="_blank"
+  >
+    <PresaIcon width={size * 1.3} />
     <span>
       Built with <strong>Presa.</strong>
     </span>
@@ -22,7 +26,7 @@ const BuiltWith = styled.a`
 
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: ${props => props.size}px;
   font-family: ${props => props.theme.monoFont};
 
   &:hover {
