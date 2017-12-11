@@ -10,3 +10,21 @@ Present with joy in React. Minimal and self-contained framework for presentation
    - Fullscreen API.
    - Supports clicker and keyboard navigation.
    - *Bird's eye* view mode. 
+   - Slides are *components*. They are not rendered until the slide is active.
+
+### Getting started
+
+Let's add a simple slide with a background.
+```JavaScript
+  import { Presentation, Slide } from 'presa'
+   
+  // No need to pass indexes here
+  const YourApp = () =>
+    <Presentation>
+      <Slide background="wat.jpg">
+        Let talk about JavaScript!
+      </Slide>
+    </Presentation>
+```
+
+If you do that in your app, Presa will run automatically.
