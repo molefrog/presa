@@ -1,6 +1,8 @@
 <img src="/src/assets/raw/presa-logo.png" width="38px" /> 
 
 ## Presa
+See the [demo here](http://molefrog.com/stateful-animations).
+
 Present with joy in React. Minimal and self-contained framework for presentations built with `styled-components`. Presa aims to be:
   - **Lightweight.** No external css needed and as minimal dependencies as possible.  
   - **Extendable.** *Presa* uses `styled-components` so almost all of its internal components can be extended and themized.
