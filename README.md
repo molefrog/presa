@@ -1,6 +1,5 @@
-<img src="/src/assets/raw/presa-logo.png" width="38px" /> 
+<img src="/src/assets/raw/presa-logo.png" height="38px" /> 
 
-## Presa
 See the [demo here](http://molefrog.com/stateful-animations).
 
 Present with joy in React. Minimal and self-contained framework for presentations built with `styled-components`. Presa aims to be:
@@ -8,8 +7,11 @@ Present with joy in React. Minimal and self-contained framework for presentation
   - **Extendable.** *Presa* uses `styled-components` so almost all of its internal components can be extended and themized.
   - **Modular.** Core barebone and building blocks are separated and may be optionally excluded from the presentation.
   - **Aestetically pleasing.** Simple but functional UI, typography included.
+
+Here is how Presa UI looks like:
+![](/src/assets/raw/presa-ui.png)
   
- List of currently supported features:
+List of currently supported features:
    - Slideshow mode with optinonal table of the contents in a sidebar.
    - Fullscreen API.
    - Supports clicker and keyboard navigation.
