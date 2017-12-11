@@ -1,3 +1,5 @@
+<img src="/src/assets/raw/presa-logo.png" width="38px" /> 
+
 ## Presa
 Present with joy in React. Minimal and self-contained framework for presentations built with `styled-components`. Presa aims to be:
   - **Lightweight.** No external css needed and as minimal dependencies as possible.  
