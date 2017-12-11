@@ -29,7 +29,8 @@ class Presentation extends Component {
     name: PropTypes.string,
     aspectRatio: PropTypes.number,
     theme: PropTypes.object,
-    tableOfContents: PropTypes.bool
+    tableOfContents: PropTypes.bool,
+    useFullscreenAPI: PropTypes.bool
   }
 
   static defaultProps = {
@@ -37,6 +38,7 @@ class Presentation extends Component {
     aspectRatio: 16.0 / 9.0,
     baseWidth: 1066.0,
     tableOfContents: false,
+    useFullscreenAPI: false,
     theme: {}
   }
 
@@ -74,12 +76,24 @@ class Presentation extends Component {
     this.setState({ currentSlide: id })
   }
 
-  toggleFullscreen = () => {
+  toggleFullscreen = goFullscreen => {
+    const { useFullscreenAPI } = this.props
+
+    if (typeof goFullscreen === 'undefined') {
+      goFullscreen = !this.state.presentMode === modes.FULLSCREEN
+    }
+
+    if (goFullscreen && useFullscreenAPI) {
+      const docEl = document.documentElement
+
+      // Use browser's Fullscreen API
+      if (docEl && docEl.webkitRequestFullscreen) {
+        docEl.webkitRequestFullscreen()
+      }
+    }
+
     this.setState(state => ({
-      presentMode:
-        state.presentMode === modes.FULLSCREEN
-          ? modes.SLIDESHOW
-          : modes.FULLSCREEN
+      presentMode: goFullscreen ? modes.FULLSCREEN : modes.SLIDESHOW
     }))
   }
 
