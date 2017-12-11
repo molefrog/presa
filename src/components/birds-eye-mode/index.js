@@ -131,7 +131,7 @@ const SlideCard = styled(Slide)`
 `
 
 const Container = styled.div`
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0px auto;
   padding: 32px 12px 64px 12px;
 `
