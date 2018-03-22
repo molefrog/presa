@@ -1,6 +1,6 @@
 {
   "name": "presa",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Stylish React presentation framework.",
   "main": "lib/index.js",
   "repository": "https://github.com/molefrog/presa.git",
