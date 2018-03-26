@@ -1,6 +1,7 @@
 
 # Created by https://www.gitignore.io/api/osx,node,sublimetext
 lib
+dist
 
 ### Node ###
 # Logs
