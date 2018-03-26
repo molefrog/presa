@@ -101,7 +101,8 @@ class Slide extends React.Component {
         {loaded && (
           <Layer {...layerProps}>
             {React.cloneElement(slide.element, {
-              onBackgroundChange: this.handleBackgroundChange
+              onBackgroundChange: this.handleBackgroundChange,
+              fragmentIndex: slide.fragmentIndex
             })}
           </Layer>
         )}

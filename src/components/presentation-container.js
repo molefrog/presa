@@ -55,6 +55,7 @@ class Presentation extends Component {
       presentationName: props.name,
       presentMode: modes.SLIDESHOW,
       currentSlide: currentIndex,
+      currentFragment: -1,
       showToc: props.tableOfContents,
 
       slideWidth: props.baseWidth,
@@ -63,17 +64,25 @@ class Presentation extends Component {
   }
 
   shiftSlide = shift => {
-    const { slides, currentSlide } = this.state
+    const { slides, currentSlide, currentFragment } = this.state
+
+    const { fragments } = slides[currentSlide]
+    const limitedFragment = Math.max(-1, Math.min(currentFragment + shift, fragments.length - 1))
+
+    if (limitedFragment !== currentFragment) return this.setState({ currentFragment: limitedFragment })
 
     const id = currentSlide + shift
     const limited = Math.max(0, Math.min(id, slides.length - 1))
 
-    this.switchSlide(limited)
+    const nextFragmentIndex = shift > 0 ? -1 : slides[limited].fragments.length - 1
+
+
+    if (limited !== currentSlide) this.switchSlide(limited, nextFragmentIndex)
   }
 
-  switchSlide = id => {
+  switchSlide = (id, fragmentIndex = -1) => {
     window.location.hash = id.toString()
-    this.setState({ currentSlide: id })
+    this.setState({ currentSlide: id, currentFragment: fragmentIndex })
   }
 
   toggleFullscreen = goFullscreen => {
@@ -113,7 +122,7 @@ class Presentation extends Component {
   }
 
   getConnectedState() {
-    const { slides, currentSlide, presentMode } = this.state
+    const { slides, currentSlide, presentMode, currentFragment } = this.state
 
     return {
       ...this.state,
@@ -122,6 +131,7 @@ class Presentation extends Component {
         ...slides[currentSlide],
         id: currentSlide,
         index: currentSlide,
+        fragmentIndex: currentFragment,
         isFirst: currentSlide <= 0,
         isLast: currentSlide >= slides.length - 1
       },
