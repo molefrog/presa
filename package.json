@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir lib",
+    "dev": "parcel demo/index.html",
     "precommit": "lint-staged"
   },
   "peerDependencies": {
@@ -23,9 +24,17 @@
     "babel-preset-react": "^6.24.1",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
+    "parcel-bundler": "^1.7.0",
     "prettier": "^1.11.1"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": ">= 0.14.0",
+    "react-dom": "^16.3.0",
+    "react-syntax-highlighter": "^7.0.2",
+    "styled-components": "^3.2.3"
   }
 }
