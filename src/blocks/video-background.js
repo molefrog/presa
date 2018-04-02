@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import getYouTubeId from 'get-youtube-id'
+
+import { BaseBackground } from '../components/slide/background'
 
 // Serializes a hash of settings into YouTube query
 // compatible format.
@@ -60,11 +61,6 @@ class VideoBackground extends React.Component {
     return <Video {...this.props} />
   }
 }
-
-const BaseBackground = styled.div`
-  width: 100%;
-  height: 100%;
-`
 
 const IFrame = BaseBackground.withComponent('iframe').extend`
   border: none;
