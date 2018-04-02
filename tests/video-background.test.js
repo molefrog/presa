@@ -48,4 +48,12 @@ describe('VideoBackground component', () => {
 
     expect(root.findAllByType('iframe').length).toEqual(1)
   })
+
+  it('supports `mute` prop', () => {
+    const root = TestRenderer.create(
+      <VideoBackground src="https://youtu.be/dQw4w9WgXcQ" mute />
+    ).root
+
+    expect(root.findByType('iframe').props.src).toMatch('mute=1')
+  })
 })

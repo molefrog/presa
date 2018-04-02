@@ -21,28 +21,31 @@ export const makeQuery = (options = {}) => {
 
 class VideoBackground extends React.Component {
   static propTypes = {
+    className: PropTypes.string,
     src: PropTypes.string.isRequired,
     autoPlay: PropTypes.bool,
     controls: PropTypes.bool,
     loop: PropTypes.bool,
-    className: PropTypes.string
+    mute: PropTypes.bool
   }
 
   static defaultProps = {
     autoPlay: true,
     controls: false,
-    loop: true
+    loop: true,
+    mute: false
   }
 
   renderYouTube(videoId) {
     const baseUrl = '//www.youtube.com/embed/'
-    const { controls, loop, autoPlay, className } = this.props
+    const { controls, loop, autoPlay, mute, className } = this.props
 
     const query = makeQuery({
       autoplay: autoPlay,
       showinfo: false,
       controls,
-      loop
+      loop,
+      mute
     })
 
     const videoSrc = `${baseUrl}${videoId}?${query}`
