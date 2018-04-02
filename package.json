@@ -25,16 +25,14 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "parcel-bundler": "^1.7.0",
-    "prettier": "^1.11.1"
-  },
-  "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
-  },
-  "dependencies": {
+    "prettier": "^1.11.1",
     "prop-types": "^15.6.1",
     "react": ">= 0.14.0",
     "react-dom": "^16.3.0",
     "react-syntax-highlighter": "^7.0.2",
     "styled-components": "^3.2.3"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   }
 }
