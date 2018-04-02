@@ -9,6 +9,7 @@ import SidebarLayout from './sidebar-layout'
 import GithubButton from './github-button'
 
 const baseTextColor = '#444'
+const primaryColor = '#3c59ff'
 
 const PitchDeck = () => (
   <Presentation name="Presa pitch deck" theme={{ textColor: baseTextColor }}>
@@ -44,7 +45,21 @@ const PitchDeck = () => (
       </Footnote>
     </Slide>
 
-    <Slide name="Getting started" centered>
+    <Slide name="Getting started" fade={0.2} centered>
+      <Numbered number={1}>
+        <H1>Quick Start</H1>
+        <H3>creating your first presentation in 10 seconds</H3>
+
+        <Description>
+          Install Presa in your project by running{' '}
+          <InlineCode>yarn add presa</InlineCode> command.<br /> You'll need to
+          install <InlineCode>react</InlineCode> and{' '}
+          <InlineCode>styled-components</InlineCode> as well.
+        </Description>
+      </Numbered>
+    </Slide>
+
+    <Slide name="Getting started: code" centered>
       <Code>{`import { Presentation, Slide } from 'presa'
 
 const App = () =>
@@ -59,7 +74,129 @@ const App = () =>
 // Make sure you render into a full-page container
 ReactDOM.render(<App />, container)`}</Code>
     </Slide>
+
+    <Slide
+      name="Slide Backgrounds"
+      background={require('./images/2.jpg')}
+      fade={0.2}
+      centered
+    >
+      <Numbered inverse number={2}>
+        <H1>Slide Backgrounds</H1>
+        <H3>
+          Presa supports images, colors and custom elements <br />
+          as slide backgrounds
+        </H3>
+      </Numbered>
+    </Slide>
+
+    <Slide name="Slide backgrounds: code" centered>
+      <Code>{`// Use an image
+<Slide background="hello.jpg" />
+
+// Add an overlay
+<Slide background="hello.jpg" fade={0.5} />
+
+// Or custom CSS prop
+<Slide background=
+  "linear-gradient(to right, #da4453, #89216b)" />
+
+// Or React element
+<Slide background={<MyCustomBackground />} />
+        `}</Code>
+    </Slide>
+
+    <Slide
+      name="Blocks"
+      fade={0.3}
+      layout={children => (
+        <SidebarLayout
+          src={require('./images/stairs.jpg')}
+          proportion="6/7"
+          children={children}
+        />
+      )}
+    >
+      <Numbered number={3}>
+        <H1>Including Blocks</H1>
+        <H3>Reusable components for your slides</H3>
+
+        <Description>
+          Presa ships with additional components that can be used in slides.
+          These components are not added by default.
+        </Description>
+
+        <Description>
+          Currently available blocks: <InlineCode>{'H1'}</InlineCode>,{' '}
+          <InlineCode>{'H2'}</InlineCode>, <InlineCode>{'H3'}</InlineCode>,{' '}
+          <InlineCode>{'Code'}</InlineCode>
+        </Description>
+      </Numbered>
+    </Slide>
+
+    <Slide name="Blocks: code" centered>
+      <Code>{`import { H1, H2, Code } from 'presa/blocks'
+
+<Slide>
+  <H1>JavaScript</H1>
+  <H2 color="pink">A beginner's guide</H2>
+
+  <Code language="ruby">
+    {\'Object.new.tap(&:inspect);\'}
+  </Code>
+</Slide>
+        `}</Code>
+    </Slide>
+
+    <Slide name="Support us!" centered>
+      <Presa />
+      <H3>Check out more</H3>
+      <p>Let us know if you want to use Presa for your talk!</p>
+      <a href="https://github.com/molefrog/presa">
+        https://github.com/molefrog/presa
+      </a>
+    </Slide>
   </Presentation>
+)
+
+const NumberedNumber = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  font-size: 26px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+
+  color: ${props => props.color};
+  border: 3px solid ${props => props.color};
+  text-shadow: none;
+`
+
+const NumberedCont = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: ${props => (props.centered ? 'center' : 'flex-start')};
+  text-align: ${props => (props.centered ? 'center' : 'left')};
+
+  padding-bottom: 100px;
+
+  ${props =>
+    props.inverse &&
+    `
+    color: white;
+    text-shadow: 1px 2px rgba(0,0,0,0.6);`};
+`
+
+const Numbered = props => (
+  <NumberedCont centered={props.centered} inverse={props.inverse}>
+    <NumberedNumber color={props.inverse ? 'white' : primaryColor}>
+      {props.number}
+    </NumberedNumber>
+    {props.children}
+  </NumberedCont>
 )
 
 const Footnote = styled.div`
@@ -68,7 +205,7 @@ const Footnote = styled.div`
 `
 
 const PresaTitle = styled(H1)`
-  color: #3c59ff;
+  color: ${primaryColor};
 `
 
 const PresaSlogan = styled(H3)`
@@ -79,6 +216,20 @@ const PresaSlogan = styled(H3)`
 const StarOnGithub = styled.div`
   margin-top: 20px;
   margin-bottom: 90px;
+`
+
+const Description = styled.p`
+  margin: 40px 0;
+  text-align: left;
+  line-height: 1.5;
+`
+
+const InlineCode = styled.code`
+  letter-spacing: -0.5px;
+  background: rgba(60, 89, 255, 0.07);
+  color: ${primaryColor};
+  padding: 3px 8px;
+  border-radius: 3px;
 `
 
 const PresaIcon = styled(Presa)`
