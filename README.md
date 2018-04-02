@@ -10,7 +10,7 @@ Presa aims to be:
 
 Here is how Presa UI looks like:
 
-[![Presa UI](/src/demo/images/presa-ui.jpg)](http://molefrog.com/stateful-animations/)
+[![Presa UI](/demo/images/presa-ui.jpg)](http://molefrog.com/stateful-animations/)
 
 List of currently supported features:
 
