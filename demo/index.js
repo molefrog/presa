@@ -107,7 +107,10 @@ ReactDOM.render(<App />, container)`}</Code>
     <Slide
       name="Video backgrounds"
       background={
-        <VideoBackground src="https://www.youtube.com/watch?v=6qGiXY1SB68" />
+        <VideoBackground
+          mute
+          src="https://www.youtube.com/watch?v=6qGiXY1SB68"
+        />
       }
       fade={0.2}
       centered
