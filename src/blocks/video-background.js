@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import getYouTubeId from 'get-youtube-id'
 
-import { BaseBackground } from '../components/slide/background'
+import { BaseBackground as BaseBg } from '../components/slide/background'
 
 // Serializes a hash of settings into YouTube query
 // compatible format.
@@ -35,7 +35,7 @@ class VideoBackground extends React.Component {
   }
 
   renderYouTube(videoId) {
-    const baseUrl = 'https://www.youtube.com/embed/'
+    const baseUrl = '//www.youtube.com/embed/'
     const { controls, loop, autoPlay, className } = this.props
 
     const query = makeQuery({
@@ -62,10 +62,13 @@ class VideoBackground extends React.Component {
   }
 }
 
-const IFrame = BaseBackground.withComponent('iframe').extend`
+const IFrame = BaseBg.withComponent('iframe').extend`
   border: none;
+
+  // when video is being loaded
+  background: black;
 `
 
-const Video = BaseBackground.withComponent('video')
+const Video = BaseBg.withComponent('video')
 
 export default VideoBackground
