@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "dev": "parcel demo/index.html",
+    "dev": "parcel demo/index.html --open",
     "precommit": "lint-staged"
   },
   "peerDependencies": {
