@@ -1,20 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import styled, { injectGlobal } from 'styled-components'
 
 import { Presentation, Slide } from '../src'
 import { H1, H2, H3, H4, Code } from '../src/blocks'
 import { Presa } from '../src/assets/icons'
 import SidebarLayout from './sidebar-layout'
-
-// to prevent additional scrollbars
-injectGlobal`
-  body {
-    margin: 0;
-    padding: 0;
-  }
-`
+import GithubButton from './github-button'
 
 const baseTextColor = '#444'
 
@@ -40,24 +32,15 @@ const PitchDeck = () => (
         component, only rendered when visible.
       </p>
 
-      <GithubButton>
-        <a
-          className="github-button"
-          href="https://github.com/molefrog/presa"
-          data-icon="octicon-star"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star molefrog/presa on GitHub"
-        >
-          Star on GitHub
-        </a>
-      </GithubButton>
+      <StarOnGithub>
+        <GithubButton repo="presa" user="molefrog" />
+      </StarOnGithub>
 
-      <p style={{ color: '#999' }}>
-        <br />—<br />
+      <Footnote>
+        —<br />
         Press the ➡️ button on your keyboard to go to the next slide or use
         controls below.
-      </p>
+      </Footnote>
     </Slide>
 
     <Slide name="Getting started" centered>
@@ -78,6 +61,11 @@ ReactDOM.render(<App />, container)`}</Code>
   </Presentation>
 )
 
+const Footnote = styled.div`
+  color: #999;
+  font-size: 18px;
+`
+
 const PresaTitle = styled(H1)`
   color: #3c59ff;
 `
@@ -87,11 +75,9 @@ const PresaSlogan = styled(H3)`
   margin-bottom: 40px;
 `
 
-const GithubButton = styled.div`
-  transform: scale(1.2);
-  transform-origin: top left;
+const StarOnGithub = styled.div`
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 110px;
 `
 
 const PresaIcon = styled(Presa)`
@@ -99,6 +85,14 @@ const PresaIcon = styled(Presa)`
   margin-right: 14px;
   width: 40px;
   height: 40px;
+`
+
+// to prevent additional scrollbars
+injectGlobal`
+  body {
+    margin: 0;
+    padding: 0;
+  }
 `
 
 const rerenderApp = () => {
