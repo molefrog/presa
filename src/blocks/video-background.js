@@ -1,8 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
+import getYouTubeId from 'get-youtube-id'
+
+// Serializes a hash of settings into YouTube query
+// compatible format.
+// { foo: true } => foo=1
 export const makeQuery = (options = {}) => {
   return Object.entries(options)
     .map(pair => {
@@ -14,45 +18,58 @@ export const makeQuery = (options = {}) => {
     .join('&')
 }
 
-class YoutubeVideo extends React.Component {
+class VideoBackground extends React.Component {
   static propTypes = {
-    video: PropTypes.string.isRequired,
-    autoplay: PropTypes.bool,
+    src: PropTypes.string.isRequired,
+    autoPlay: PropTypes.bool,
     controls: PropTypes.bool,
-    loop: PropTypes.bool
+    loop: PropTypes.bool,
+    className: PropTypes.string
   }
 
   static defaultProps = {
-    autoplay: true,
+    autoPlay: true,
     controls: false,
     loop: true
   }
 
-  makeUrl() {
+  renderYouTube(videoId) {
     const baseUrl = 'https://www.youtube.com/embed/'
+    const { controls, loop, autoPlay, className } = this.props
 
-    const { video } = this.props
-
-    // controls=0&showinfo=0&rel=0&autoplay=1&loop=1
-    const { controls, loop, autoplay } = this.props
     const query = makeQuery({
+      autoplay: autoPlay,
       showinfo: false,
       controls,
-      loop,
-      autoplay
+      loop
     })
 
-    return `${baseUrl}${video}?${query}`
+    const videoSrc = `${baseUrl}${videoId}?${query}`
+
+    return <IFrame src={videoSrc} className={className} />
   }
 
   render() {
-    return <Iframe src={this.makeUrl()} frameBorder="0" allowFullScreen />
+    // try to extract youtube id first
+    const ytVideo = getYouTubeId(this.props.src, { fuzzy: false })
+
+    if (ytVideo) {
+      return this.renderYouTube(ytVideo)
+    }
+
+    return <Video {...this.props} />
   }
 }
 
-const Iframe = styled.iframe`
+const BaseBackground = styled.div`
   width: 100%;
   height: 100%;
 `
 
-export default YoutubeVideo
+const IFrame = BaseBackground.withComponent('iframe').extend`
+  border: none;
+`
+
+const Video = BaseBackground.withComponent('video')
+
+export default VideoBackground
