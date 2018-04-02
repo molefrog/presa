@@ -24,6 +24,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "husky": "^0.14.3",
+    "jest": "^22.4.3",
     "lint-staged": "^7.0.0",
     "parcel-bundler": "^1.7.0",
     "prettier": "^1.11.1",
@@ -31,7 +32,6 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-syntax-highlighter": "^7.0.2",
-    "jest": "^22.4.3",
     "styled-components": "^3.2.3"
   },
   "lint-staged": {
