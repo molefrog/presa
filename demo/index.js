@@ -101,7 +101,18 @@ const PresaIcon = styled(Presa)`
   height: 40px;
 `
 
-document.addEventListener('DOMContentLoaded', () => {
+const rerenderApp = () => {
   const container = document.getElementById('container')
+
+  // clean up and render
+  ReactDOM.unmountComponentAtNode(container)
   ReactDOM.render(<PitchDeck />, container)
+}
+
+if (module.hot) {
+  module.hot.accept(rerenderApp)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  rerenderApp()
 })
