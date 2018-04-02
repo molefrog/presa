@@ -4,6 +4,8 @@ import styled, { injectGlobal } from 'styled-components'
 
 import { Presentation, Slide } from '../src'
 import { H1, H2, H3, H4, Code } from '../src/blocks'
+import VideoBackground from '../src/blocks/video-background'
+
 import { Presa } from '../src/assets/icons'
 import SidebarLayout from './sidebar-layout'
 import GithubButton from './github-button'
@@ -31,7 +33,7 @@ const PitchDeck = () => (
 
       <p>
         Presa is lightweight, declarative and modular. Each slide is a React
-        component, only it's only rendered when visible.
+        component: only rendered when visible.
       </p>
 
       <StarOnGithub>
@@ -45,7 +47,7 @@ const PitchDeck = () => (
       </Footnote>
     </Slide>
 
-    <Slide name="Getting started" fade={0.2} centered>
+    <Slide name="Installing Presa" fade={0.2} centered>
       <Numbered number={1}>
         <H1>Quick Start</H1>
         <H3>creating your first presentation in 10 seconds</H3>
@@ -99,11 +101,34 @@ ReactDOM.render(<App />, container)`}</Code>
 
 // Or custom CSS prop
 <Slide background=
-  "linear-gradient(to right, #da4453, #89216b)" />
+  "linear-gradient(to right, #da4453, #89216b)" />`}</Code>
+    </Slide>
 
-// Or React element
-<Slide background={<MyCustomBackground />} />
-        `}</Code>
+    <Slide
+      name="Video backgrounds"
+      background={
+        <VideoBackground src="https://www.youtube.com/watch?v=6qGiXY1SB68" />
+      }
+      fade={0.2}
+      centered
+    >
+      <Numbered inverse number={3}>
+        <H1>Video Backgrounds</H1>
+        <H3>made with custom background elements</H3>
+      </Numbered>
+    </Slide>
+
+    <Slide name="Video backgrounds: code" centered>
+      <Code>{`// blocks are optional elements
+import { VideoBackground } from 'presa/blocks'
+
+// \`background\` accepts any valid React element —
+// allows to use custom backgrounds.
+<Slide background={
+  <VideoBackground src="..." />
+} />
+
+// (you can pass YouTube link or link to a local file)`}</Code>
     </Slide>
 
     <Slide
@@ -117,7 +142,7 @@ ReactDOM.render(<App />, container)`}</Code>
         />
       )}
     >
-      <Numbered number={3}>
+      <Numbered number={4}>
         <H1>Including Blocks</H1>
         <H3>Reusable components for your slides</H3>
 
@@ -134,7 +159,7 @@ ReactDOM.render(<App />, container)`}</Code>
       </Numbered>
     </Slide>
 
-    <Slide name="Blocks: code" centered>
+    <Slide name="Code block" centered>
       <Code>{`import { H1, H2, Code } from 'presa/blocks'
 
 <Slide>
