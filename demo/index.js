@@ -16,7 +16,8 @@ const PitchDeck = () => (
       name="What is Presa?"
       layout={children => (
         <SidebarLayout
-          src="https://images.unsplash.com/photo-1416269223193-bc45028133f5?ixlib=rb-0.3.5&s=de9cf50e342bd5a92bf1850dc7f409c0&auto=format&fit=crop&w=1275&q=80"
+          src={require('./images/conference.jpg')}
+          proportion="6/7"
           children={children}
         />
       )}
@@ -29,7 +30,7 @@ const PitchDeck = () => (
 
       <p>
         Presa is lightweight, declarative and modular. Each slide is a React
-        component, only rendered when visible.
+        component, only it's only rendered when visible.
       </p>
 
       <StarOnGithub>
@@ -77,7 +78,7 @@ const PresaSlogan = styled(H3)`
 
 const StarOnGithub = styled.div`
   margin-top: 20px;
-  margin-bottom: 110px;
+  margin-bottom: 90px;
 `
 
 const PresaIcon = styled(Presa)`

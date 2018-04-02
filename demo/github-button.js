@@ -13,7 +13,7 @@ class GithubButton extends Component {
       <iframe
         className={className}
         src={frameSource}
-        frameborder="0"
+        frameBorder="0"
         scrolling="0"
         height={30}
       />
