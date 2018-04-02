@@ -18,7 +18,7 @@ const PitchDeck = () => (
       layout={children => (
         <SidebarLayout
           src={require('./images/conference.jpg')}
-          proportion="6/7"
+          proportion="6/9"
           children={children}
         />
       )}
@@ -77,7 +77,7 @@ ReactDOM.render(<App />, container)`}</Code>
 
     <Slide
       name="Slide Backgrounds"
-      background={require('./images/2.jpg')}
+      background={require('./images/camera.jpg')}
       fade={0.2}
       centered
     >
@@ -112,7 +112,7 @@ ReactDOM.render(<App />, container)`}</Code>
       layout={children => (
         <SidebarLayout
           src={require('./images/stairs.jpg')}
-          proportion="6/7"
+          proportion="2/3"
           children={children}
         />
       )}
