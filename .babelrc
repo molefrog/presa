@@ -1,5 +1,15 @@
 {
-  "presets": ["react", "env"],
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "not samsung 6.2"]
+        }
+      }
+    ]
+  ],
   "plugins": [
     "transform-object-rest-spread",
     "babel-plugin-transform-class-properties"

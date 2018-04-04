@@ -37,10 +37,12 @@ export const backgroundFor = props => {
   return null
 }
 
-const PlainBackground = styled.div`
+export const BaseBackground = styled.div`
   width: 100%;
   height: 100%;
+`
 
+export const PlainBackground = BaseBackground.extend`
   ${props => props.raw && `background: ${props.raw}`};
 
   /*

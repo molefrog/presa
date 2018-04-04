@@ -7,28 +7,39 @@
   "author": "Alexey Taktarov <molefrog@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "dev": "parcel demo/index.html --open",
+    "precommit": "lint-staged"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "styled-components": "^2.0.0"
   },
-  "browserslist": [
-    "last 3 Chrome versions"
-  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "parcel-bundler": "^1.6.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.0.0",
+    "parcel-bundler": "^1.7.0",
+    "prettier": "^1.11.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-syntax-highlighter": "^7.0.2",
+    "react-test-renderer": "^16.3.0",
     "styled-components": "^3.2.3"
   },
   "dependencies": {
-    "create-react-context": "^0.2.1"
+    "create-react-context": "^0.2.1",
+    "get-youtube-id": "^1.0.0"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   }
 }
