@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { backgroundFor } from './background'
 import { DefaultLayout, CenteredLayout } from './layouts'
-import { FragmentProvider } from './context'
+import SlideContext from './context'
 
 class Slide extends Component {
   static propTypes = {
@@ -69,9 +69,9 @@ class Slide extends Component {
 
     return (
       <SlideContent className={className} centered={centered}>
-        <FragmentProvider value={fragmentIndex}>
+        <SlideContext.Provider value={fragmentIndex}>
           {this.renderWithinLayout(this.props.children)}
-        </FragmentProvider>
+        </SlideContext.Provider>
       </SlideContent>
     )
   }

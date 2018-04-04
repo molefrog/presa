@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { FragmentConsumer } from '../slide/context'
+import SlideContext from '../slide/context'
 import styled from 'styled-components'
 
 const OpacityBehaviour = styled.div`
@@ -25,12 +25,12 @@ class Fragment extends React.Component {
     const Behaviour = behaviour
 
     return (
-      <FragmentConsumer>
+      <SlideContext.Consumer>
         {fragmentIndex => {
           const isActive = index <= fragmentIndex
           return <Behaviour {...restProps} active={isActive} />
         }}
-      </FragmentConsumer>
+      </SlideContext.Consumer>
     )
   }
 }
