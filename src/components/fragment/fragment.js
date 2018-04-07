@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import SlideContext from '../slide/context'
+import Manager from './manager'
 import styled from 'styled-components'
 
 const OpacityBehaviour = styled.div`
@@ -10,7 +11,7 @@ const OpacityBehaviour = styled.div`
   opacity: ${props => (props.active ? 1 : 0)};
 `
 
-class Fragment extends React.Component {
+class FragmentImpl extends Component {
   static propTypes = {
     behaviour: PropTypes.any
   }
@@ -19,18 +20,32 @@ class Fragment extends React.Component {
     behaviour: OpacityBehaviour
   }
 
+  constructor(props) {
+    super(props)
+    console.log('sdf')
+  }
+
+  render() {
+    // const isActive = index <= fragmentIndex
+    // return <Behaviour {...restProps} active={isActive} />
+    return null
+  }
+}
+
+class Fragment extends Component {
+  constructor(props, ...rest) {
+    super(props, ...rest)
+  }
+
   render() {
     const { index, behaviour, ...restProps } = this.props
 
     const Behaviour = behaviour
 
     return (
-      <SlideContext.Consumer>
-        {fragmentIndex => {
-          const isActive = index <= fragmentIndex
-          return <Behaviour {...restProps} active={isActive} />
-        }}
-      </SlideContext.Consumer>
+      <Manager.Consumer>
+        {manager => <FragmentImpl {...restProps} />}
+      </Manager.Consumer>
     )
   }
 }
