@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import SlideContext from '../slide/context'
 import Manager from './manager'
 import styled from 'styled-components'
 
@@ -11,9 +10,11 @@ const OpacityBehaviour = styled.div`
   opacity: ${props => (props.active ? 1 : 0)};
 `
 
-class FragmentImpl extends Component {
+class Fragment extends Component {
   static propTypes = {
-    behaviour: PropTypes.any
+    behaviour: PropTypes.any,
+    index: PropTypes.number,
+    manager: PropTypes.object.isRequired
   }
 
   static defaultProps = {
@@ -22,32 +23,26 @@ class FragmentImpl extends Component {
 
   constructor(props) {
     super(props)
-    console.log('sdf')
+    this._instance = props.manager.registerFragment(props.index)
+  }
+
+  componentWillUnmount() {
+    this._instance.unregister()
   }
 
   render() {
-    // const isActive = index <= fragmentIndex
-    // return <Behaviour {...restProps} active={isActive} />
-    return null
-  }
-}
-
-class Fragment extends Component {
-  constructor(props, ...rest) {
-    super(props, ...rest)
-  }
-
-  render() {
-    const { index, behaviour, ...restProps } = this.props
-
+    const { manager, behaviour, ...restProps } = this.props
     const Behaviour = behaviour
 
-    return (
-      <Manager.Consumer>
-        {manager => <FragmentImpl {...restProps} />}
-      </Manager.Consumer>
-    )
+    const isActive = manager.isIndexActive(this._instance.index)
+    return <Behaviour {...restProps} active={isActive} />
   }
 }
 
-export default Fragment
+const FragmentConnected = props => (
+  <Manager.Consumer>
+    {args => <Fragment {...props} manager={args.manager} />}
+  </Manager.Consumer>
+)
+
+export default FragmentConnected
