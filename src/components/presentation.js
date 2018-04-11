@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import PresentationContainer from './presentation-container'
-import Fragment from '../components/fragment'
 
 class Presentation extends Component {
   static propTypes = {
@@ -16,11 +15,7 @@ class Presentation extends Component {
       return {
         name: slideElement.props.name,
         description: slideElement.props.description,
-
-        element: slideElement,
-        fragments: React.Children
-          .map(slideElement.props.children, child => child)
-          .filter(child => child.type === Fragment)
+        element: slideElement
       }
     })
   }

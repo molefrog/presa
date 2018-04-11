@@ -11,6 +11,8 @@ import BirdsEyeMode from './birds-eye-mode'
 // default theme for styled components
 import defaultTheme from '../theme'
 
+import { NO_FRAGMENTS, ALL_FRAGMENTS } from './fragment/constants'
+
 const modes = {
   FULLSCREEN: 'FULLSCREEN',
   SLIDESHOW: 'SLIDESHOW',
@@ -28,6 +30,8 @@ class Presentation extends Component {
   static propTypes = {
     name: PropTypes.string,
     aspectRatio: PropTypes.number,
+    baseWidth: PropTypes.number,
+    slides: PropTypes.array,
     theme: PropTypes.object,
     tableOfContents: PropTypes.bool,
     useFullscreenAPI: PropTypes.bool
@@ -55,7 +59,7 @@ class Presentation extends Component {
       presentationName: props.name,
       presentMode: modes.SLIDESHOW,
       currentSlide: currentIndex,
-      currentFragment: -1,
+      initialFragment: NO_FRAGMENTS,
       showToc: props.tableOfContents,
 
       slideWidth: props.baseWidth,
@@ -63,26 +67,32 @@ class Presentation extends Component {
     }
   }
 
-  shiftSlide = shift => {
-    const { slides, currentSlide, currentFragment } = this.state
+  // Jump through `shift` number of slides/fragments
+  navigate = shift => {
+    const { slides, currentSlide } = this.state
 
-    const { fragments } = slides[currentSlide]
-    const limitedFragment = Math.max(-1, Math.min(currentFragment + shift, fragments.length - 1))
+    // first, talk to the current fragment manager
+    // it returns `false` if no fragments left
+    const manager = this._fragmentManager
+    if (manager && manager.navigate(shift)) {
+      return
+    }
 
-    if (limitedFragment !== currentFragment) return this.setState({ currentFragment: limitedFragment })
-
+    // go to prev/next slide
     const id = currentSlide + shift
     const limited = Math.max(0, Math.min(id, slides.length - 1))
 
-    const nextFragmentIndex = shift > 0 ? -1 : slides[limited].fragments.length - 1
-
-
-    if (limited !== currentSlide) this.switchSlide(limited, nextFragmentIndex)
+    const forwards = shift >= 0
+    this.switchSlide(limited, forwards)
   }
 
-  switchSlide = (id, fragmentIndex = -1) => {
+  switchSlide = (id, forwards = true) => {
     window.location.hash = id.toString()
-    this.setState({ currentSlide: id, currentFragment: fragmentIndex })
+
+    // When moving forwards show no fragments first,
+    // when going backwards all fragments activated first.
+    const fragment = forwards ? NO_FRAGMENTS : ALL_FRAGMENTS
+    this.setState({ currentSlide: id, initialFragment: fragment })
   }
 
   toggleFullscreen = goFullscreen => {
@@ -101,7 +111,7 @@ class Presentation extends Component {
       }
     }
 
-    this.setState(state => ({
+    this.setState(() => ({
       presentMode: goFullscreen ? modes.FULLSCREEN : modes.SLIDESHOW
     }))
   }
@@ -121,8 +131,12 @@ class Presentation extends Component {
     })
   }
 
+  setFragmentManager = manager => {
+    this._fragmentManager = manager
+  }
+
   getConnectedState() {
-    const { slides, currentSlide, presentMode, currentFragment } = this.state
+    const { slides, currentSlide, presentMode, initialFragment } = this.state
 
     return {
       ...this.state,
@@ -131,9 +145,10 @@ class Presentation extends Component {
         ...slides[currentSlide],
         id: currentSlide,
         index: currentSlide,
-        fragmentIndex: currentFragment,
+        initialFragmentIndex: initialFragment,
         isFirst: currentSlide <= 0,
-        isLast: currentSlide >= slides.length - 1
+        isLast: currentSlide >= slides.length - 1,
+        setFragmentManager: this.setFragmentManager
       },
 
       isSlideshow: presentMode === modes.SLIDESHOW,
@@ -144,8 +159,8 @@ class Presentation extends Component {
       switchSlide: this.switchSlide,
       toggleToc: this.toggleToc,
       toggleBirdsEye: this.toggleBirdsEye,
-      showNextSlide: () => this.shiftSlide(+1),
-      showPrevSlide: () => this.shiftSlide(-1)
+      showNextSlide: () => this.navigate(+1),
+      showPrevSlide: () => this.navigate(-1)
     }
   }
 

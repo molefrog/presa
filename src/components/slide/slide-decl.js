@@ -5,15 +5,20 @@ import styled from 'styled-components'
 
 import { backgroundFor } from './background'
 import { DefaultLayout, CenteredLayout } from './layouts'
-import SlideContext from './context'
+import FragmentManager from '../fragment/manager'
 
 class Slide extends Component {
   static propTypes = {
     onBackgroundChange: PropTypes.func,
     centered: PropTypes.bool,
+    className: PropTypes.string,
 
-    // Layout determines how content is
-    // positioned on a slide
+    initialFragmentIndex: PropTypes.number,
+    setFragmentManager: PropTypes.func,
+
+    children: PropTypes.any,
+
+    // Layout determines how content is positioned on a slide
     layout: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool,
@@ -65,13 +70,16 @@ class Slide extends Component {
   }
 
   render() {
-    const { className, centered, fragmentIndex } = this.props
+    const { className, centered } = this.props
 
     return (
       <SlideContent className={className} centered={centered}>
-        <SlideContext.Provider value={fragmentIndex}>
+        <FragmentManager
+          ref={this.props.setFragmentManager}
+          initialIndex={this.props.initialFragmentIndex}
+        >
           {this.renderWithinLayout(this.props.children)}
-        </SlideContext.Provider>
+        </FragmentManager>
       </SlideContent>
     )
   }
